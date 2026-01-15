@@ -1,8 +1,8 @@
-export default {
-  async fetch(request: Request) {
-    const url = new URL(request.url);
-    const name = url.searchParams.get('name') || 'World';
- 
-    return Response.json({ message: `Hello ${name}!` });
-  },
-};
+import type { VercelRequest, VercelResponse } from '@vercel/node'
+
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  const { name = 'World' } = req.query
+  return res.json({
+    message: `Hello ${name}!`,
+  })
+}
